@@ -113,19 +113,37 @@
       padding: 15px;
       border-radius: 8px;
       color: #e0e0e0;
+      max-height: 400px;
+      overflow-y: auto;
     }
 
-    #songDisplay button {
-      margin-top: 10px;
-      background-color: #555;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
+    .scroll-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .scroll-controls input {
+      width: 50px;
+      text-align: center;
+      background-color: #222;
       color: white;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 6px;
     }
 
-    #songDisplay button:hover {
+    .scroll-controls button {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: none;
+      background-color: #555;
+      color: white;
+      cursor: pointer;
+    }
+
+    .scroll-controls button:hover {
       background-color: #777;
     }
   </style>
@@ -136,7 +154,6 @@
     <button onclick="showPraiseSongs()">Praise Songs</button>
     <button onclick="showWorshipSongs()">Worship Songs</button>
     <button onclick="showContent()">Content</button>
-
   </div>
 
   <div class="content">
@@ -153,55 +170,40 @@
     const songs = {
       "Yeshu Tera Naam": {
         category: "praise",
-        content: `       
+        content: `
 (F)         (Eb)
 YESHU TERA NAAM
-
 (Bb)        (F)
 SABSE UCHA HAI       -(x4)
 
-   (F)                (Eb)
+(F)                (Eb)
 1. JIS NAAM MAIN HAI MUKTI
-   (Bb)                 (F)
-   JIS NAAM MAIN HAI SHAKTI 
-   (F)                 (Eb) 
-   JIS NAAM MAIN HAI SHANTI
-   (Bb)               (F)
-   DETA VOH NAAM CHANGAIE
+(Bb)                 (F)
+JIS NAAM MAIN HAI SHAKTI 
+(F)                 (Eb) 
+JIS NAAM MAIN HAI SHANTI
+(Bb)               (F)
+DETA VOH NAAM CHANGAIE
 
 (C)                  (Gm)  (Bb)           (F)
 JIS NAAM MAIN HAI ZINDAGI ,YESHU HAI VOH NAAM
 (C)                  (Gm)  (Bb)           (F)
 JIS NAAM MAIN HAI BANDAGI ,YESHU HAI VOH NAAM
 
-2.  (F)              (Eb)
-    BIMARI SE ,GARIBI SE
-    (Bb)               (F)
-    SHRAPON SE HAI CHUDATA
-    (F)                   (Eb)
-    VOH NAAM HAI JO ANDHON KO
-    (Bb)                 (F)
-    ROSHANI BHI HAI JO DETA`
-      },"praise": {
+2.   (F)              (Eb)
+      BIMARI SE ,GARIBI SE
+     (Bb)               (F)
+     SHRAPON SE HAI CHUDATA
+     (F)                   (Eb)
+     VOH NAAM HAI JO ANDHON KO
+     (Bb)                 (F)
+     ROSHANI BHI HAI JO DETA`
+      },
+      "Praise": {
         category: "praise",
         content: `
-        
 Key:A      
 Capo:2nd fret
-
-[Intro]
-N.C.
-Let everything that has breath
-N.C.
-Praise the Lord
-N.C.
-Praise the Lord
-N.C.
-Let everything that has breath
-N.C.
-Praise the Lord
-N.C.
-Praise the Lord
  
 [Verse I]
        G
@@ -348,41 +350,12 @@ How could I keep it inside
 Em   C      G
 Praise the Lord
         D
-Oh my soul
- 
-[Interlude]
-Em C G D
-Em C G D
- 
-[Outro]
-N.C.
-Let everything that has breath
-N.C.
-Praise the Lord
-N.C.
-Praise the Lord
-N.C.
-Let everything that has breath
-N.C.
-Praise the Lord
-N.C.
-Praise the Lord
-N.C.
-Let everything that has breath
-N.C.
-Praise the Lord
-N.C.
-Praise the Lord
-N.C.
-Let everything that has breath
-N.C.
-Praise the Lord
-N.C.
-Praise the Lord `
+Oh my soul`
       },
       "Charno Main Tere Hum Ate Hain": {
         category: "worship",
-        content: `(D)                       (A)
+        content: `
+(D)                       (A)
 CHARNO MAIN TERE HUM ATE HAIN
 (D)                   (A)   
 SARA ADAR TUJKO DETE HAIN   - x2
@@ -395,15 +368,15 @@ VANDANA KARTE HAIN   - x2
 (D)            (G)             (D)
 HALLELUJAH ....HALLELUJAH......AMEN   - x2
 
-1. (D)                (Em)
-   DHANYA TUJHE HUM , KEHETE HAIN AAJ
-   (A)             (D)
-   SARE JAHAN KA , HAI TU SARKAR    - x2
+1.   (D)                (Em)
+     DHANYA TUJHE HUM , KEHETE HAIN AAJ
+     (A)             (D)
+     SARE JAHAN KA , HAI TU SARKAR    - x2
 
-(A)               (Em)
-SISH HUM JHUKATE HAIN
-(A)            (D)
-VANDANA KARTE HAIN   - x2
+    (A)               (Em)
+    SISH HUM JHUKATE HAIN
+    (A)            (D)
+    VANDANA KARTE HAIN   - x2
 
 (D)            (G)             (D)
 HALLELUJAH ....HALLELUJAH......AMEN   - x2`
@@ -411,30 +384,30 @@ HALLELUJAH ....HALLELUJAH......AMEN   - x2`
       "Jai Yeshu": {
         category: "worship",
         content: `
-   (D)   (G)   (A)   (D)
-   JAI YESHU , JAI YESHU
-   (Bm)     (Em)
-   JAI YESHUUUU
-   (A) (G) (D) 
-   JAI JAI YESHU
+(D)   (G)   (A)   (D)
+JAI YESHU , JAI YESHU
+(Bm)     (Em)
+JAI YESHUUUU
+(A) (G) (D) 
+JAI JAI YESHU
 
-1. (D)                 (G)
-   MERE MAAN MAIN TU HI TU
-   (A)              (D)
-   MERE NAZAR MAIN TU HI TU
-   (Bm)            (Em)
-   MERE HOTO MAIN TU HI TU UUU
-   (A)            (D)
-   MERE DIL MAIN TU HI TU
+1.  (D)                 (G)
+    MERE MAAN MAIN TU HI TU
+    (A)              (D)
+    MERE NAZAR MAIN TU HI TU
+    (Bm)            (Em)
+    MERE HOTO MAIN TU HI TU UUU
+    (A)            (D)
+    MERE DIL MAIN TU HI TU
 
-2. (D)                      (G)
-   MERI PRARTHANA MAIN TU HI TU
-   (A)              (D)
-   MERE STUTI MAIN TU HI TU
-   (Bm)            (Em)
-   MERE GEETO MAIN TU HI TU UUU
-   (A)            (D)
-   MERE JEEVAN MAIN TU HI TU`
+2.  (D)                      (G)
+    MERI PRARTHANA MAIN TU HI TU
+    (A)              (D)
+    MERE STUTI MAIN TU HI TU
+    (Bm)            (Em)
+    MERE GEETO MAIN TU HI TU UUU
+    (A)            (D)
+    MERE JEEVAN MAIN TU HI TU`
       }
     };
 
@@ -469,23 +442,25 @@ HALLELUJAH ....HALLELUJAH......AMEN   - x2`
       const input = forcedQuery || document.getElementById("searchInput").value.trim();
       const lowerInput = input.toLowerCase();
       const match = Object.keys(songs).find(key => key.toLowerCase() === lowerInput);
-      
+
       if (match) {
         songDisplay.innerHTML = `
-  <h3>${match}</h3>
-  <pre>${songs[match].content}</pre>
-`;
-
+          <h3>${match}</h3>
+          <div class="scroll-controls">
+            <button onclick="decreaseSpeed()">-</button>
+            <input type="number" id="scrollSpeed" value="2.0" step="0.1" min="0.1">
+            <button onclick="increaseSpeed()">+</button>
+            <button onclick="startAutoScroll()">Start</button>
+            <button onclick="stopAutoScroll()">Stop</button>
+          </div>
+          <pre id="songContent">${songs[match].content}</pre>
+        `;
         suggestionsBox.innerHTML = "";
+        stopAutoScroll();
       } else {
         songDisplay.innerHTML = `<p>No results found.</p>`;
         suggestionsBox.innerHTML = "";
       }
-    }
-
-    function clearDisplay() {
-      songDisplay.innerHTML = "";
-      document.getElementById("searchInput").value = "";
     }
 
     document.getElementById("clearSearch").addEventListener("click", function () {
@@ -493,65 +468,96 @@ HALLELUJAH ....HALLELUJAH......AMEN   - x2`
       songDisplay.innerHTML = "";
       suggestionsBox.innerHTML = "";
     });
+
     document.getElementById("searchInput").addEventListener("input", function () {
-  const query = this.value.trim().toLowerCase();
-  suggestionsBox.innerHTML = "";
+      const query = this.value.trim().toLowerCase();
+      suggestionsBox.innerHTML = "";
+      if (query.length === 0) return;
 
-  if (query.length === 0) return;
+      const matches = Object.keys(songs).filter(song =>
+        song.toLowerCase().startsWith(query)
+      );
 
-  const matches = Object.keys(songs).filter(song =>
-    song.toLowerCase().startsWith(query)
-  );
+      matches.forEach(song => {
+        const btn = document.createElement("button");
+        btn.textContent = song;
+        btn.onclick = () => handleSearch(song);
+        suggestionsBox.appendChild(btn);
+      });
+    });
 
-  matches.forEach(song => {
-    const btn = document.createElement("button");
-    btn.textContent = song;
-    btn.onclick = () => handleSearch(song);
-    suggestionsBox.appendChild(btn);
-  });
-});
-function showContent() {
-  suggestionsBox.innerHTML = "";
-  songDisplay.innerHTML = "";
+    function showContent() {
+      suggestionsBox.innerHTML = "";
+      songDisplay.innerHTML = "";
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const wrapper = document.createElement("div");
+      wrapper.style.display = "flex";
+      wrapper.style.flexWrap = "wrap";
+      wrapper.style.gap = "10px";
 
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      for (let letter of alphabet) {
+        const btn = document.createElement("button");
+        btn.textContent = letter;
+        btn.style.flex = "1 0 calc(20% - 10px)";
+        btn.onclick = () => filterSongsByLetter(letter);
+        wrapper.appendChild(btn);
+      }
+      suggestionsBox.appendChild(wrapper);
+    }
 
-  const wrapper = document.createElement("div");
-  wrapper.style.display = "flex";
-  wrapper.style.flexWrap = "wrap";
-  wrapper.style.gap = "10px";
+    function filterSongsByLetter(letter) {
+      suggestionsBox.innerHTML = "";
+      songDisplay.innerHTML = "";
+      const matches = Object.keys(songs).filter(song =>
+        song[0].toUpperCase() === letter && songs[song].content
+      );
 
-  for (let letter of alphabet) {
-    const btn = document.createElement("button");
-    btn.textContent = letter;
-    btn.style.flex = "1 0 calc(20% - 10px)";
-    btn.onclick = () => filterSongsByLetter(letter);
-    wrapper.appendChild(btn);
-  }
+      if (matches.length === 0) {
+        suggestionsBox.innerHTML = `<p>No songs found for '${letter}'.</p>`;
+        return;
+      }
 
-  suggestionsBox.appendChild(wrapper);
-}
-function filterSongsByLetter(letter) {
-  suggestionsBox.innerHTML = "";
-  songDisplay.innerHTML = "";
+      matches.forEach(song => {
+        const btn = document.createElement("button");
+        btn.textContent = song;
+        btn.onclick = () => handleSearch(song);
+        suggestionsBox.appendChild(btn);
+      });
+    }
 
-  const matches = Object.keys(songs).filter(song =>
-    song[0].toUpperCase() === letter && songs[song].content
-  );
+    let scrollInterval;
 
-  if (matches.length === 0) {
-    suggestionsBox.innerHTML = `<p>No songs found for '${letter}'.</p>`;
-    return;
-  }
+    function startAutoScroll() {
+      stopAutoScroll();
+      const speedInput = document.getElementById("scrollSpeed");
+      speedInput.value = "2.0"; // set to 2 when started
+      const speed = parseFloat(speedInput.value);
+      const content = document.getElementById("songContent");
 
-  matches.forEach(song => {
-    const btn = document.createElement("button");
-    btn.textContent = song;
-    btn.onclick = () => handleSearch(song);
-    suggestionsBox.appendChild(btn);
-  });
-}
+      if (speed > 0 && content) {
+        scrollInterval = setInterval(() => {
+          content.scrollTop += 1;
+          if (content.scrollTop + content.clientHeight >= content.scrollHeight) {
+            stopAutoScroll();
+          }
+        }, 1000 / speed); // high number = faster
+      }
+    }
 
+    function stopAutoScroll() {
+      clearInterval(scrollInterval);
+    }
+
+    function increaseSpeed() {
+      const speedInput = document.getElementById("scrollSpeed");
+      speedInput.value = (parseFloat(speedInput.value) + 0.1).toFixed(1);
+    }
+
+    function decreaseSpeed() {
+      const speedInput = document.getElementById("scrollSpeed");
+      let newSpeed = Math.max(0.1, parseFloat(speedInput.value) - 0.1);
+      speedInput.value = newSpeed.toFixed(1);
+    }
   </script>
 </body>
 </html>
