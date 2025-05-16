@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title></title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #111;
+      color: #eee;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 250px;
+      height: 100vh;
+      background-color: #1c1c1c;
+      color: #f2a365;
+      transition: left 0.3s ease;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .menu-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 20px;
+      width: 25px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .menu-icon.hidden {
+      display: none;
+    }
+
+    .menu-icon div {
+      height: 3px;
+      background-color: #f2a365;
+      border-radius: 2px;
+    }
+
+    .topbar {
+      background-color: #2f2f2f;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .info-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #f2a365;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .search-container {
+      position: absolute;
+      top: 20px;
+      right: 70px;
+      display: flex;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      margin-right: 10px;
+      border-radius: 8px;
+      border: 1px solid #f2a365;
+      background-color: #333;
+      color: #f2a365;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #f2a365;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ffda6f;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      color: #f2a365;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    .modal .close {
+      color: #f2a365;
+      font-size: 30px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    #songDisplay {
+      margin-top: 20px;
+      padding: 20px;
+      color: #f2a365;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="menu-icon" id="menuIcon" onclick="toggleSidebar()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <button class="info-button" onclick="showInfo()">i</button>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search...">
+    <button onclick="handleSearch()">Search</button>
+  </div>
+
+  <div class="sidebar" id="sidebar">
+    <button onclick="showPraiseSong()">Praise Songs</button>
+    <button onclick="showWorshipSong()">Worship Songs</button>
+    <button onclick="showHolySpiritSong()">Holy Spirit</button>
+  </div>
+
+  <div class="content">
+    <div id="songDisplay"></div>
+  </div>
+
+  <div class="modal" id="infoModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeInfo()">&times;</span>
+      <h2>About</h2>
+      <p>"This website is designed specifically for musicians, offering a comprehensive collection of song lyrics accompanied by their corresponding chords, making it easier for users to play and sing along." 
+        <br><p style="text-align: right;"><bold>~ BY DEAN DABRE</bold></p>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById("sidebar");
+    const songDisplay = document.getElementById("songDisplay");
+    const menuIcon = document.getElementById("menuIcon");
+    const infoModal = document.getElementById("infoModal");
+
+    function toggleSidebar() {
+      sidebar.classList.toggle("open");
+      menuIcon.classList.toggle("hidden", sidebar.classList.contains("open"));
+    }
+
+    document.addEventListener("click", function (event) {
+      const isClickInside = sidebar.contains(event.target) || event.target.closest('.menu-icon');
+      if (!isClickInside) {
+        sidebar.classList.remove("open");
+        menuIcon.classList.remove("hidden");
+      }
+    });
+
+    function handleSearch() {
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      sidebar.classList.remove("open");
+      menuIcon.classList.remove("hidden");
+
+      if (query === "yeshu tera naam") {
+        songDisplay.innerHTML = `
+<pre>(F)         (Eb)
+YESHU TERA NAAM
+
+(Bb)        (F)
+SABSE UCHA HAI       -(x4)
+
+   (F)                (Eb)
+1. JIS NAAM MAIN HAI MUKTI
+   (Bb)                 (F)
+   JIS NAAM MAIN HAI SHAKTI 
+   (F)                 (Eb) 
+   JIS NAAM MAIN HAI SHANTI
+   (Bb)               (F)
+   DETA VOH NAAM CHANGAIE
+
+(C)                  (Gm)  (Bb)           (F)
+JIS NAAM MAIN HAI ZINDAGI ,YESHU HAI VOH NAAM
+(C)                  (Gm)  (Bb)           (F)
+JIS NAAM MAIN HAI BANDAGI ,YESHU HAI VOH NAAM
+
+2.  (F)              (Eb)
+    BIMARI SE ,GARIBI SE
+    (Bb)               (F)
+    SHRAPON SE HAI CHUDATA
+    (F)                   (Eb)
+    VOH NAAM HAI JO ANDHON KO
+    (Bb)                 (F)
+    ROSHANI BHI HAI JO DETA</pre>`;
+      } else if (query === "charno main tere hum ate hain") {
+        songDisplay.innerHTML = `
+<pre>
+(D)                       (A)
+CHARNO MAIN TERE HUM ATE HAIN
+(D)                   (A)   - x2
+SARA ADAR TUJKO DETE HAIN
+
+(A)               (Em)
+SISH HUM JHUKATE HAIN
+(A)            (D)
+VANDANA KARTE HAIN   - x2
+
+(D)            (G)             (D)
+HALLELUJAH ....HALLELUJAH......AMEN   - x2
+
+1. (D)                (Em)
+   DHANYA TUJHE HUM , KEHETE HAIN AAJ
+   (A)             (D)
+   SARE JAHAN KA , HAI TU SARKAR    - x2
+
+(A)               (Em)
+SISH HUM JHUKATE HAIN
+(A)            (D)
+VANDANA KARTE HAIN   - x2
+
+(D)            (G)             (D)
+HALLELUJAH ....HALLELUJAH......AMEN   - x2
+</pre>`;
+      } else if (query === "jai yeshu") {
+        songDisplay.innerHTML = `
+<pre>
+   (D)   (G)  (A)   (D)
+   JAI YESHU, JAI YESHU
+   (Bm)     (Em)
+   JAI YESHUUUU
+   (A) (G) (D) 
+   JAI JAI YESHU
+
+1. (D)                 (G)
+   MERE MAAN MAIN TU HI TU
+   (A)              (D)
+   MERE NAZAR MAIN TU HI TU
+   (Bm)            (Em)
+   MERE HOTO MAIN TU HI TU UUU
+   (A)            (D)
+   MERE DIL MAIN TU HI TU
+
+2. (D)                      (G)
+   MERI PRARTHANA MAIN TU HI TU
+   (A)              (D)
+   MERE STUTI MAIN TU HI TU
+   (Bm)            (Em)
+   MERE GEETO MAIN TU HI TU UUU
+   (A)            (D)
+   MERE JEEVAN MAIN TU HI TU
+</pre>`;
+      } else if (query === "pavitra atma aa") {
+        songDisplay.innerHTML = `
+<pre>
+  pavitra atma aa 
+  pavitra atma aa 
+  mujhe le jao yeshu ke charno main 
+  pavitra atma aa
+</pre>`;
+      } else {
+        songDisplay.innerHTML = `<p style="color: #ccc;">No results found for: <b>${query}</b></p>`;
+      }
+    }
+
+    function showPraiseSong() {
+      sidebar.classList.remove("open");
+      menuIcon.classList.remove("hidden");
+      songDisplay.innerHTML = `<h2 style="color: #f2a365;">Yeshu Tera Naam</h2>`;
+    }
+
+    function showWorshipSong() {
+      sidebar.classList.remove("open");
+      menuIcon.classList.remove("hidden");
+      songDisplay.innerHTML = `
+        <div style="color: #f2a365; line-height: 1.2; font-size: 1.2em;">
+          <div>Charno Main Tere Hum Ate Hain</div>
+          <div>Jai Yeshu</div>
+        </div>`;
+    }
+
+    function showHolySpiritSong() {
+      sidebar.classList.remove("open");
+      menuIcon.classList.remove("hidden");
+      songDisplay.innerHTML = `
+        <div style="color: #f2a365; line-height: 1.2; font-size: 1.2em;">
+          <div>Pavitra Atma Aa</div>
+        </div>`;
+    }
+
+    function showInfo() {
+      infoModal.style.display = "flex";
+    }
+
+    function closeInfo() {
+      infoModal.style.display = "none";
+    }
+
+    document.getElementById("searchInput").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        handleSearch();
+      }
+    });
+  </script>
+</body>
+</html>
