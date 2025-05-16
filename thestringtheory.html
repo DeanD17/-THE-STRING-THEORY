@@ -3,246 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title></title>
+  <title>CHURCH SONGS</title>
   <style>
     body {
-      margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #111;
-      color: #eee;
+      margin: 0;
+      display: flex;
+      background-color: #121212;
+      color: #f0f0f0;
     }
 
     .sidebar {
-      position: fixed;
-      top: 0;
-      left: -100%;
       width: 250px;
+      background: linear-gradient(180deg, #1f1f1f, #2e2e2e);
+      color: white;
       height: 100vh;
-      background-color: #1c1c1c;
-      color: #f2a365;
-      transition: left 0.3s ease;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.4);
-      z-index: 1000;
       padding: 20px;
+      box-sizing: border-box;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5);
     }
 
-    .sidebar.open {
-      left: 0;
+    .sidebar h2 {
+      margin-top: 0;
+      color: #00ffcc;
     }
 
-    .menu-icon {
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 20px;
-      width: 25px;
-      cursor: pointer;
-      z-index: 1100;
-    }
-
-    .menu-icon.hidden {
-      display: none;
-    }
-
-    .menu-icon div {
-      height: 3px;
-      background-color: #f2a365;
-      border-radius: 2px;
-    }
-
-    .topbar {
-      background-color: #2f2f2f;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .info-button {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: #f2a365;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .search-container {
-      position: absolute;
-      top: 20px;
-      right: 70px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    input[type="text"] {
-      padding: 8px;
-      margin-right: 10px;
-      border-radius: 8px;
-      border: 1px solid #f2a365;
-      background-color: #333;
-      color: #f2a365;
-    }
-
-    button {
-      width: 100%;
+    .sidebar button {
+      display: block;
+      margin: 10px 0;
       padding: 10px;
-      margin-top: 10px;
+      width: 100%;
+      background-color: #333;
+      color: white;
       border: none;
       border-radius: 8px;
-      background-color: #f2a365;
-      color: #000;
-      font-weight: bold;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
 
-    button:hover {
-      background-color: #ffda6f;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background-color: #333;
-      padding: 20px;
-      border-radius: 10px;
-      color: #f2a365;
-      width: 80%;
-      max-width: 500px;
-    }
-
-    .modal .close {
-      color: #f2a365;
-      font-size: 30px;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
+    .sidebar button:hover {
+      background-color: #444;
     }
 
     .content {
+      flex: 1;
       padding: 20px;
+      background-color: #181818;
     }
 
-    #songDisplay {
-      margin-top: 20px;
-      padding: 20px;
-      color: #f2a365;
-      white-space: pre-wrap;
+    #searchBar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
     }
 
-    .suggestions {
-      background-color: #333;
-      border: 1px solid #f2a365;
-      color: #f2a365;
-      border-radius: 4px;
-      width: 220px;
-      position: absolute;
-      top: 40px;
-      z-index: 999;
+    #searchInput {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background-color: #222;
+      color: #fff;
     }
 
-    .suggestions div {
-      padding: 5px 10px;
+    #searchBar button {
+      padding: 10px 14px;
+      border: none;
+      background-color: #00bfa5;
+      color: white;
+      border-radius: 6px;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
 
-    .suggestions div:hover {
-      background-color: #444;
+    #searchBar button:hover {
+      background-color: #009e88;
+    }
+
+    #clearSearch {
+      background-color: #ff4c4c;
+    }
+
+    #clearSearch:hover {
+      background-color: #d43b3b;
+    }
+
+    #suggestions button {
+      display: block;
+      margin: 5px 0;
+      padding: 8px;
+      width: 100%;
+      text-align: left;
+      background-color: #2a2a2a;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #suggestions button:hover {
+      background-color: #3a3a3a;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      background-color: #222;
+      padding: 15px;
+      border-radius: 8px;
+      color: #e0e0e0;
+    }
+
+    #songDisplay button {
+      margin-top: 10px;
+      background-color: #555;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+    }
+
+    #songDisplay button:hover {
+      background-color: #777;
     }
   </style>
 </head>
 <body>
+  <div class="sidebar">
+    <h2>CHURCH SONGS</h2>
+    <button onclick="showPraiseSongs()">Praise Songs</button>
+    <button onclick="showWorshipSongs()">Worship Songs</button>
+    <button onclick="showContent()">Content</button>
 
-  <div class="topbar">
-    <div class="menu-icon" id="menuIcon" onclick="toggleSidebar()">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-
-  <button class="info-button" onclick="showInfo()">i</button>
-
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search...">
-    <div id="suggestionsBox" class="suggestions"></div>
-    <button onclick="handleSearch()">Search</button>
-  </div>
-
-  <div class="sidebar" id="sidebar">
-    <button onclick="showPraiseSong()">Praise Songs</button>
-    <button onclick="showWorshipSong()">Worship Songs</button>
-    <button onclick="showHolySpiritSong()">Holy Spirit</button>
   </div>
 
   <div class="content">
+    <div id="searchBar">
+      <input type="text" id="searchInput" placeholder="Search songs..." />
+      <button onclick="handleSearch()">Search</button>
+      <button id="clearSearch">❌</button>
+    </div>
+    <div id="suggestions"></div>
     <div id="songDisplay"></div>
   </div>
 
-  <div class="modal" id="infoModal">
-    <div class="modal-content">
-      <span class="close" onclick="closeInfo()">&times;</span>
-      <h2>About</h2>
-      <p>"This website is designed specifically for musicians, offering a comprehensive collection of song lyrics accompanied by their corresponding chords, making it easier for users to play and sing along." 
-        <br><p style="text-align: right;"><bold>~ BY DEAN DABRE</bold></p>
-      </p>
-    </div>
-  </div>
-
   <script>
-    const sidebar = document.getElementById("sidebar");
-    const songDisplay = document.getElementById("songDisplay");
-    const menuIcon = document.getElementById("menuIcon");
-    const infoModal = document.getElementById("infoModal");
-    const suggestionsBox = document.getElementById("suggestionsBox");
-
-    function toggleSidebar() {
-      sidebar.classList.toggle("open");
-      menuIcon.classList.toggle("hidden", sidebar.classList.contains("open"));
-    }
-
-    document.addEventListener("click", function (event) {
-      const isClickInside = sidebar.contains(event.target) || event.target.closest('.menu-icon') || event.target.closest('.search-container');
-      if (!isClickInside) {
-        sidebar.classList.remove("open");
-        menuIcon.classList.remove("hidden");
-        suggestionsBox.innerHTML = "";
-      }
-    });
-
-    function handleSearch() {
-      const query = document.getElementById("searchInput").value.trim().toLowerCase();
-      suggestionsBox.innerHTML = "";
-      sidebar.classList.remove("open");
-      menuIcon.classList.remove("hidden");
-
-      if (query === "yeshu tera naam") {
-        songDisplay.innerHTML = `
-        <pre>
-        
+    const songs = {
+      "Yeshu Tera Naam": {
+        category: "praise",
+        content: `       
 (F)         (Eb)
 YESHU TERA NAAM
 
@@ -270,76 +181,12 @@ JIS NAAM MAIN HAI BANDAGI ,YESHU HAI VOH NAAM
     (F)                   (Eb)
     VOH NAAM HAI JO ANDHON KO
     (Bb)                 (F)
-    ROSHANI BHI HAI JO DETA
-</pre>`;
-      } else if (query === "charno main tere hum ate hain") {
-        songDisplay.innerHTML = `
-        <pre>
-(D)                       (A)
-CHARNO MAIN TERE HUM ATE HAIN
-(D)                   (A)   
-SARA ADAR TUJKO DETE HAIN   - x2
-
-(A)               (Em)
-SISH HUM JHUKATE HAIN
-(A)            (D)
-VANDANA KARTE HAIN   - x2
-
-(D)            (G)             (D)
-HALLELUJAH ....HALLELUJAH......AMEN   - x2
-
-1. (D)                (Em)
-   DHANYA TUJHE HUM , KEHETE HAIN AAJ
-   (A)             (D)
-   SARE JAHAN KA , HAI TU SARKAR    - x2
-
-(A)               (Em)
-SISH HUM JHUKATE HAIN
-(A)            (D)
-VANDANA KARTE HAIN   - x2
-
-(D)            (G)             (D)
-HALLELUJAH ....HALLELUJAH......AMEN   - x2
-</pre>`;
-      } else if (query === "jai yeshu") {
-        songDisplay.innerHTML = `
-        <pre>(D)   (G)  (A)   (D)
-   JAI YESHU, JAI YESHU
-   (Bm)     (Em)
-   JAI YESHUUUU
-   (A) (G) (D) 
-   JAI JAI YESHU
-
-1. (D)                 (G)
-   MERE MAAN MAIN TU HI TU
-   (A)              (D)
-   MERE NAZAR MAIN TU HI TU
-   (Bm)            (Em)
-   MERE HOTO MAIN TU HI TU UUU
-   (A)            (D)
-   MERE DIL MAIN TU HI TU
-
-2. (D)                      (G)
-   MERI PRARTHANA MAIN TU HI TU
-   (A)              (D)
-   MERE STUTI MAIN TU HI TU
-   (Bm)            (Em)
-   MERE GEETO MAIN TU HI TU UUU
-   (A)            (D)
-   MERE JEEVAN MAIN TU HI TU</pre>`;
-      } else if (query === "pavitra atma aa") {
-        songDisplay.innerHTML = `<pre>
-pavitra atma aa
-mujhe le jao yeshu ke charno main
-</pre>`;
-      } else if (query === "tere paas") {
-        songDisplay.innerHTML = `<pre>
-tere paas ata hu
-yeshu tere paas
-</pre>`;
-      } else if (query === "praise") {
-        songDisplay.innerHTML = `<pre>
-Key:A
+    ROSHANI BHI HAI JO DETA`
+      },"praise": {
+        category: "praise",
+        content: `
+        
+Key:A      
 Capo:2nd fret
 
 [Intro]
@@ -531,77 +378,180 @@ Let everything that has breath
 N.C.
 Praise the Lord
 N.C.
-Praise the Lord
-</pre>`;
-      } else {
-        songDisplay.innerHTML = `<p style="color: #ccc;">No results found for: <b>${query}</b></p>`;
+Praise the Lord `
+      },
+      "Charno Main Tere Hum Ate Hain": {
+        category: "worship",
+        content: `(D)                       (A)
+CHARNO MAIN TERE HUM ATE HAIN
+(D)                   (A)   
+SARA ADAR TUJKO DETE HAIN   - x2
+
+(A)               (Em)
+SISH HUM JHUKATE HAIN
+(A)            (D)
+VANDANA KARTE HAIN   - x2
+
+(D)            (G)             (D)
+HALLELUJAH ....HALLELUJAH......AMEN   - x2
+
+1. (D)                (Em)
+   DHANYA TUJHE HUM , KEHETE HAIN AAJ
+   (A)             (D)
+   SARE JAHAN KA , HAI TU SARKAR    - x2
+
+(A)               (Em)
+SISH HUM JHUKATE HAIN
+(A)            (D)
+VANDANA KARTE HAIN   - x2
+
+(D)            (G)             (D)
+HALLELUJAH ....HALLELUJAH......AMEN   - x2`
+      },
+      "Jai Yeshu": {
+        category: "worship",
+        content: `
+   (D)   (G)   (A)   (D)
+   JAI YESHU , JAI YESHU
+   (Bm)     (Em)
+   JAI YESHUUUU
+   (A) (G) (D) 
+   JAI JAI YESHU
+
+1. (D)                 (G)
+   MERE MAAN MAIN TU HI TU
+   (A)              (D)
+   MERE NAZAR MAIN TU HI TU
+   (Bm)            (Em)
+   MERE HOTO MAIN TU HI TU UUU
+   (A)            (D)
+   MERE DIL MAIN TU HI TU
+
+2. (D)                      (G)
+   MERI PRARTHANA MAIN TU HI TU
+   (A)              (D)
+   MERE STUTI MAIN TU HI TU
+   (Bm)            (Em)
+   MERE GEETO MAIN TU HI TU UUU
+   (A)            (D)
+   MERE JEEVAN MAIN TU HI TU`
       }
-    }
+    };
 
-    function showPraiseSong() {
-      sidebar.classList.remove("open");
-      menuIcon.classList.remove("hidden");
-      songDisplay.innerHTML = `<div style="color: #f2a365; line-height: 1.2; font-size: 1.2em;">
-        <div>Yeshu Tera Naam</div>
-        <div>Praise</div></div>`;
-    }
+    const suggestionsBox = document.getElementById("suggestions");
+    const songDisplay = document.getElementById("songDisplay");
 
-    function showWorshipSong() {
-      sidebar.classList.remove("open");
-      menuIcon.classList.remove("hidden");
-      songDisplay.innerHTML = `<div style="color: #f2a365; line-height: 1.2; font-size: 1.2em;">
-        <div>Charno Main Tere Hum Ate Hain</div>
-        <div>Jai Yeshu</div>
-        <div>Tere Paas</div>
-      </div>`;
-    }
-
-    function showHolySpiritSong() {
-      sidebar.classList.remove("open");
-      menuIcon.classList.remove("hidden");
-      songDisplay.innerHTML = `<div style="color: #f2a365; line-height: 1.2; font-size: 1.2em;">
-        <div>Pavitra Atma Aa</div>
-      </div>`;
-    }
-
-    function showInfo() {
-      infoModal.style.display = "flex";
-    }
-
-    function closeInfo() {
-      infoModal.style.display = "none";
-    }
-
-    document.getElementById("searchInput").addEventListener("keydown", function(event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        handleSearch();
-      }
-    });
-
-    const suggestions = [
-      "Yeshu Tera Naam",
-      "Charno Main Tere Hum Ate Hain",
-      "Jai Yeshu",
-      "Pavitra Atma Aa",
-      "Tere Paas",
-      "Praise"
-    ];
-
-    document.getElementById("searchInput").addEventListener("input", function() {
-      const input = this.value.toLowerCase();
-      const matches = suggestions.filter(song => song.toLowerCase().startsWith(input));
+    function showPraiseSongs() {
       suggestionsBox.innerHTML = "";
-      matches.forEach(song => {
-        const div = document.createElement("div");
-        div.textContent = song;
-        div.onclick = () => {
-          document.getElementById("searchInput").value = song;
-          suggestionsBox.innerHTML = "";
-        };
-        suggestionsBox.appendChild(div);
+      const praiseSongs = Object.keys(songs).filter(key => songs[key].category === "praise");
+      praiseSongs.forEach(song => {
+        const btn = document.createElement("button");
+        btn.textContent = song;
+        btn.onclick = () => handleSearch(song);
+        suggestionsBox.appendChild(btn);
       });
+      songDisplay.innerHTML = "";
+    }
+
+    function showWorshipSongs() {
+      suggestionsBox.innerHTML = "";
+      const worshipSongs = Object.keys(songs).filter(key => songs[key].category === "worship");
+      worshipSongs.forEach(song => {
+        const btn = document.createElement("button");
+        btn.textContent = song;
+        btn.onclick = () => handleSearch(song);
+        suggestionsBox.appendChild(btn);
+      });
+      songDisplay.innerHTML = "";
+    }
+
+    function handleSearch(forcedQuery) {
+      const input = forcedQuery || document.getElementById("searchInput").value.trim();
+      const lowerInput = input.toLowerCase();
+      const match = Object.keys(songs).find(key => key.toLowerCase() === lowerInput);
+      
+      if (match) {
+        songDisplay.innerHTML = `
+  <h3>${match}</h3>
+  <pre>${songs[match].content}</pre>
+`;
+
+        suggestionsBox.innerHTML = "";
+      } else {
+        songDisplay.innerHTML = `<p>No results found.</p>`;
+        suggestionsBox.innerHTML = "";
+      }
+    }
+
+    function clearDisplay() {
+      songDisplay.innerHTML = "";
+      document.getElementById("searchInput").value = "";
+    }
+
+    document.getElementById("clearSearch").addEventListener("click", function () {
+      document.getElementById("searchInput").value = "";
+      songDisplay.innerHTML = "";
+      suggestionsBox.innerHTML = "";
     });
+    document.getElementById("searchInput").addEventListener("input", function () {
+  const query = this.value.trim().toLowerCase();
+  suggestionsBox.innerHTML = "";
+
+  if (query.length === 0) return;
+
+  const matches = Object.keys(songs).filter(song =>
+    song.toLowerCase().startsWith(query)
+  );
+
+  matches.forEach(song => {
+    const btn = document.createElement("button");
+    btn.textContent = song;
+    btn.onclick = () => handleSearch(song);
+    suggestionsBox.appendChild(btn);
+  });
+});
+function showContent() {
+  suggestionsBox.innerHTML = "";
+  songDisplay.innerHTML = "";
+
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  const wrapper = document.createElement("div");
+  wrapper.style.display = "flex";
+  wrapper.style.flexWrap = "wrap";
+  wrapper.style.gap = "10px";
+
+  for (let letter of alphabet) {
+    const btn = document.createElement("button");
+    btn.textContent = letter;
+    btn.style.flex = "1 0 calc(20% - 10px)";
+    btn.onclick = () => filterSongsByLetter(letter);
+    wrapper.appendChild(btn);
+  }
+
+  suggestionsBox.appendChild(wrapper);
+}
+function filterSongsByLetter(letter) {
+  suggestionsBox.innerHTML = "";
+  songDisplay.innerHTML = "";
+
+  const matches = Object.keys(songs).filter(song =>
+    song[0].toUpperCase() === letter && songs[song].content
+  );
+
+  if (matches.length === 0) {
+    suggestionsBox.innerHTML = `<p>No songs found for '${letter}'.</p>`;
+    return;
+  }
+
+  matches.forEach(song => {
+    const btn = document.createElement("button");
+    btn.textContent = song;
+    btn.onclick = () => handleSearch(song);
+    suggestionsBox.appendChild(btn);
+  });
+}
+
   </script>
 </body>
 </html>
