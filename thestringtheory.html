@@ -116,36 +116,6 @@
       max-height: 400px;
       overflow-y: auto;
     }
-
-    .scroll-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 10px 0;
-    }
-
-    .scroll-controls input {
-      width: 50px;
-      text-align: center;
-      background-color: #222;
-      color: white;
-      border: 1px solid #333;
-      border-radius: 6px;
-      padding: 6px;
-    }
-
-    .scroll-controls button {
-      padding: 6px 10px;
-      border-radius: 6px;
-      border: none;
-      background-color: #555;
-      color: white;
-      cursor: pointer;
-    }
-
-    .scroll-controls button:hover {
-      background-color: #777;
-    }
   </style>
 </head>
 <body>
@@ -170,8 +140,7 @@
     const songs = {
       "Yeshu Tera Naam": {
         category: "praise",
-        content: `
-(F)         (Eb)
+        content: `(F)         (Eb)
 YESHU TERA NAAM
 (Bb)        (F)
 SABSE UCHA HAI       -(x4)
@@ -183,231 +152,63 @@ JIS NAAM MAIN HAI SHAKTI
 (F)                 (Eb) 
 JIS NAAM MAIN HAI SHANTI
 (Bb)               (F)
-DETA VOH NAAM CHANGAIE
-
-(C)                  (Gm)  (Bb)           (F)
-JIS NAAM MAIN HAI ZINDAGI ,YESHU HAI VOH NAAM
-(C)                  (Gm)  (Bb)           (F)
-JIS NAAM MAIN HAI BANDAGI ,YESHU HAI VOH NAAM
-
-2.   (F)              (Eb)
-      BIMARI SE ,GARIBI SE
-     (Bb)               (F)
-     SHRAPON SE HAI CHUDATA
-     (F)                   (Eb)
-     VOH NAAM HAI JO ANDHON KO
-     (Bb)                 (F)
-     ROSHANI BHI HAI JO DETA`
+DETA VOH NAAM CHANGAIE`
       },
       "Praise": {
         category: "praise",
-        content: `
-Key:A      
-Capo:2nd fret
- 
-[Verse I]
-       G
-I’ll praise in the valley
-C             G
-Praise on the mountain
-       D                 C
-I’ll praise when I’m sure
-                 G
-Praise when I’m doubting
-       G
-I’ll praise when outnumbered
-C               G
-Praise when surrounded
- D/F#                     C
-Cause praise is the waters
-             G
-My enemies drown in
- 
-[Pre-Chorus]
-    D
-As long as I’m breathing
-C
-I’ve got a reason to
- 
-[Chorus]
-Em   C      G
-Praise the Lord
-        D
-Oh my soul
-Em   C      G
-Praise the Lord
-        D
-Oh my soul
- 
-[Verse II]
-       G
-I’ll praise when I feel it
-       C            G
-I’ll praise when I don’t
-       D
-I’ll praise cause I know
-C                    G
-You’re still in control
-     G
-My praise is a weapon
-     C            G
-It’s more than a sound
- D/F#                 C
-My praise is the shout
-                     G
-That brings Jericho down
- 
-[Pre-Chorus]
-    D
-As long as I’m breathing
-C
-I’ve got a reason to
- 
-[Chorus]
-Em   C      G
-Praise the Lord
-        D
-Oh my soul
-Em   C      G
-Praise the Lord
-        D
-Oh my soul
-Em
-I won’t be quiet
-    C
-My God is alive
- G                     D
-How could I keep it inside
-Em   C      G
-Praise the Lord
-        D
-Oh my soul
- 
-[Interlude]
-G
- 
-[Bridge]
-G
-I’ll praise cause You’re sovereign
-G
-Praise cause You reign
-G
-Praise cause You rose and defeated the grave
-G
-I’ll praise cause You’re faithful
-G
-Praise cause You’re true
-G
-Praise cause there’s nobody greater than You
-       G
-I’ll praise cause You’re sovereign
-Am
-Praise cause You reign
-G/B                          C
-Praise cause You rose and defeated the grave
-       G
-I’ll praise cause You’re faithful
-Am
-Praise cause You’re true
-G/B                           C
-Praise cause there’s nobody greater than You
- 
-[Chorus]
-Em   C      G
-Praise the Lord
-        D
-Oh my soul
-Em   C      G
-Praise the Lord
-        D
-Oh my soul
-Em   C      G
-Praise the Lord
-        D
-Oh my soul
-Em   C      G
-Praise the Lord
-        D
-Oh my soul
-Em
-I wont be quiet
-    C
-My God is alive
- G                     D
-How could I keep it inside
-Em
-I wont be quiet
-    C
-My God is alive
- G                     D
-How could I keep it inside
-Em
-I wont be quiet
-    C
-My God is alive
- G                     D
-How could I keep it inside
-Em   C      G
-Praise the Lord
-        D
-Oh my soul`
+        content: `Key: A
+Capo: 2nd Fret
+
+[A] Mera dil tujhmein basa hai
+[F#m] Tu hi mera raasta hai
+[D] Tu mera sab kuch hai
+[E] Tere jaisa koi nahi
+
+[A] Teri mahima gaata hoon
+[F#m] Har pal tujhmein jeeta hoon
+[D] Tujhmein hi aradhna
+[E] Tujhmein hi vishwas hai
+
+Chorus:
+[A] Yeshu naam mahaan hai
+[F#m] Yeshu naam mahaan hai
+[D] Yeshu naam mahaan hai
+[E] Sada ke liye
+
+Bridge:
+[D] Tu hi rajaon ka raja
+[A] Tu hi mahima ka taaj
+[E] Tere aage jhukte hain sab
+[F#m] Tu akela pavitra hai`
       },
       "Charno Main Tere Hum Ate Hain": {
         category: "worship",
-        content: `
-(D)                       (A)
+        content: `(D)                       (A)
 CHARNO MAIN TERE HUM ATE HAIN
 (D)                   (A)   
 SARA ADAR TUJKO DETE HAIN   - x2
 
-(A)               (Em)
-SISH HUM JHUKATE HAIN
-(A)            (D)
-VANDANA KARTE HAIN   - x2
+(G)                    (D)
+KYA DETE TERE CHARNO MAIN
+(Em)                 (A)
+APNA TAN MAN AUR JIVAN
 
-(D)            (G)             (D)
-HALLELUJAH ....HALLELUJAH......AMEN   - x2
-
-1.   (D)                (Em)
-     DHANYA TUJHE HUM , KEHETE HAIN AAJ
-     (A)             (D)
-     SARE JAHAN KA , HAI TU SARKAR    - x2
-
-    (A)               (Em)
-    SISH HUM JHUKATE HAIN
-    (A)            (D)
-    VANDANA KARTE HAIN   - x2
-
-(D)            (G)             (D)
-HALLELUJAH ....HALLELUJAH......AMEN   - x2`
+(D)              (G)
+TERE HI LIYE SAB KUCHH
+(Em)         (A)     (D)
+TUJHKO HI ARPAN KARTE HAIN`
       },
       "Jai Yeshu": {
         category: "worship",
-        content: `
-(D)   (G)   (A)   (D)
+        content: `(D)   (G)   (A)   (D)
 JAI YESHU , JAI YESHU
 (Bm)     (Em)
 JAI YESHUUUU
-(A) (G) (D) 
-JAI JAI YESHU
 
-1.  (D)                 (G)
-    MERE MAAN MAIN TU HI TU
-    (A)              (D)
-    MERE NAZAR MAIN TU HI TU
-    (Bm)            (Em)
-    MERE HOTO MAIN TU HI TU UUU
-    (A)            (D)
-    MERE DIL MAIN TU HI TU
-
-2.  (D)                      (G)
-    MERI PRARTHANA MAIN TU HI TU
-    (A)              (D)
-    MERE STUTI MAIN TU HI TU
-    (Bm)            (Em)
-    MERE GEETO MAIN TU HI TU UUU
-    (A)            (D)
-    MERE JEEVAN MAIN TU HI TU`
+(D)           (G)
+TUJH MEIN SHAKTI
+(A)             (D)
+TUJH MEIN SAMAADHAN`
       }
     };
 
@@ -446,17 +247,9 @@ JAI JAI YESHU
       if (match) {
         songDisplay.innerHTML = `
           <h3>${match}</h3>
-          <div class="scroll-controls">
-            <button onclick="decreaseSpeed()">-</button>
-            <input type="number" id="scrollSpeed" value="2.0" step="0.1" min="0.1">
-            <button onclick="increaseSpeed()">+</button>
-            <button onclick="startAutoScroll()">Start</button>
-            <button onclick="stopAutoScroll()">Stop</button>
-          </div>
           <pre id="songContent">${songs[match].content}</pre>
         `;
         suggestionsBox.innerHTML = "";
-        stopAutoScroll();
       } else {
         songDisplay.innerHTML = `<p>No results found.</p>`;
         suggestionsBox.innerHTML = "";
@@ -523,40 +316,6 @@ JAI JAI YESHU
         btn.onclick = () => handleSearch(song);
         suggestionsBox.appendChild(btn);
       });
-    }
-
-    let scrollInterval;
-
-    function startAutoScroll() {
-      stopAutoScroll();
-      const speedInput = document.getElementById("scrollSpeed");
-      speedInput.value = "2.0"; // set to 2 when started
-      const speed = parseFloat(speedInput.value);
-      const content = document.getElementById("songContent");
-
-      if (speed > 0 && content) {
-        scrollInterval = setInterval(() => {
-          content.scrollTop += 1;
-          if (content.scrollTop + content.clientHeight >= content.scrollHeight) {
-            stopAutoScroll();
-          }
-        }, 1000 / speed); // high number = faster
-      }
-    }
-
-    function stopAutoScroll() {
-      clearInterval(scrollInterval);
-    }
-
-    function increaseSpeed() {
-      const speedInput = document.getElementById("scrollSpeed");
-      speedInput.value = (parseFloat(speedInput.value) + 0.1).toFixed(1);
-    }
-
-    function decreaseSpeed() {
-      const speedInput = document.getElementById("scrollSpeed");
-      let newSpeed = Math.max(0.1, parseFloat(speedInput.value) - 0.1);
-      speedInput.value = newSpeed.toFixed(1);
     }
   </script>
 </body>
